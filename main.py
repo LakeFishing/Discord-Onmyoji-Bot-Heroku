@@ -1,6 +1,7 @@
 import discord
 from discord.ext import commands
 import json
+import os
 
 with open("setting.json","r",encoding="utf-8") as jFile_1:
     jdata_1 = json.load(jFile_1)
