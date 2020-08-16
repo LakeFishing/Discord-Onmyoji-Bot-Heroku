@@ -33,4 +33,4 @@ async def on_message(msg):
         if msg.content in question and msg.channel.id in qachannellist and msg.author != bot.user and msg.is_system() == False:
             await msg.channel.send(jdata_3[question])
 
-bot.run(jdata_1["Token"])
+bot.run(os.environ['TOKEN'])
