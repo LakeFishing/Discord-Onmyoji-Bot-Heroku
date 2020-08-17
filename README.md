@@ -12,8 +12,6 @@
 
 需準備包含 Channel ID 的 setting.json 檔案
 
-以繁體中文在頻道中輸入式神名稱或逢魔之時題目關鍵字
-
 ## 24/7
 
 架設於 Heroku
