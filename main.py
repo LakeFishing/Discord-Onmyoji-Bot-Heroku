@@ -67,7 +67,7 @@ async def on_message(msg):
 
     if embed.__len__() >= 1000:
         embed.clear_fields()
-        embed.add_field(name="> 錯誤", value="查詢結果過多，判定為錯誤查詢", inline=False)
+        embed.add_field(name="> 錯誤", value="```查詢結果過多，判定為錯誤查詢```", inline=False)
         await msg.channel.send(embed=embed)
 
     await bot.process_commands(msg)
