@@ -55,7 +55,7 @@ async def on_message(msg):
     qachannellist = list(jdata_1["QAAgreeChannel"])
     if msg.author != bot.user:
         for question in questions:
-            if msg.content in question and msg.channel.id in qachannellist and msg.is_system() == False:
+            if msg.content.upper() in question and msg.channel.id in qachannellist and msg.is_system() == False:
                 qa_string += jdata_3[question]
                 result = True
                 qa_result = True
@@ -63,21 +63,23 @@ async def on_message(msg):
             embed.add_field(name="> 逢魔之時", value=qa_string, inline=False)
 
     if result == True and embed.__len__() < 1000:
+        embed.set_footer(text="有任何問題或建議請找 YellowToFish#5671")
         await msg.channel.send(embed=embed)
 
     if embed.__len__() >= 1000:
         embed.clear_fields()
         embed.add_field(name="> 錯誤", value="```查詢結果過多，判定為錯誤查詢```", inline=False)
+        embed.set_footer(text="有任何問題或建議請找 YellowToFish#5671")
         await msg.channel.send(embed=embed)
 
     await bot.process_commands(msg)
 
-    if msg.content == "help" and msg.author != bot.user and msg.is_system() == False:
+    if msg.content.upper() == "HELP" and msg.author != bot.user and msg.is_system() == False:
         embed=discord.Embed(title="Help", color=0xffff00)
         embed.add_field(name="> 名稱", value="```陰陽師查詢工具```", inline=False)
         embed.add_field(name="> 查詢範圍", value="```懸賞封印 / 懸賞封印線索 / 逢魔答題```", inline=False)
-        embed.add_field(name="> 更新時間", value="```2020/08/24```", inline=False)
-        embed.add_field(name="> 聯繫方式", value="```YellowToFish#5671```", inline=False)
+        embed.add_field(name="> 更新時間", value="```2020/09/08```", inline=False)
+        embed.set_footer(text="有任何問題或建議請找 YellowToFish#5671")
         await msg.channel.send(embed=embed)
 
 bot.run(os.environ['TOKEN'])
