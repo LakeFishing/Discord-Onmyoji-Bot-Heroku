@@ -35,14 +35,14 @@ async def on_message(msg):
 
     keywords = list(jdata_2.keys())
     rewardchannellist = list(jdata_1["RewardAgreeChannel"])
-    if msg.author != bot.user:
+    if msg.author != bot.user and msg.author.bot == False:
         for keyword in keywords:
             if keyword in msg.content and msg.channel.id in rewardchannellist and msg.is_system() == False:
                 embed.add_field(name="> 懸賞封印", value=jdata_2[keyword], inline=False)
                 result = True
 
     clues = list(jdata_4.keys())
-    if msg.author != bot.user:
+    if msg.author != bot.user and msg.author.bot == False:
         for clue in clues:
             if msg.content in clue and msg.channel.id in rewardchannellist and msg.is_system() == False:
                 clue_string += jdata_4[clue]
@@ -53,7 +53,7 @@ async def on_message(msg):
 
     questions = list(jdata_3.keys())
     qachannellist = list(jdata_1["QAAgreeChannel"])
-    if msg.author != bot.user:
+    if msg.author != bot.user and msg.author.bot == False:
         for question in questions:
             if msg.content.upper() in question and msg.channel.id in qachannellist and msg.is_system() == False:
                 qa_string += jdata_3[question]
@@ -66,7 +66,7 @@ async def on_message(msg):
         embed.set_footer(text="有任何問題或建議請找 YellowToFish#5671")
         await msg.channel.send(embed=embed)
 
-    if embed.__len__() >= 1000:
+    if embed.__len__() >= 1000 and msg.author.bot == False:
         embed.clear_fields()
         embed.add_field(name="> 錯誤", value="```查詢結果過多，判定為錯誤查詢```", inline=False)
         embed.set_footer(text="有任何問題或建議請找 YellowToFish#5671")
@@ -74,11 +74,11 @@ async def on_message(msg):
 
     await bot.process_commands(msg)
 
-    if msg.content.upper() == "HELP" and msg.author != bot.user and msg.is_system() == False:
+    if msg.content.upper() == "HELP" and msg.author != bot.user and msg.is_system() == False and msg.author.bot == False:
         embed=discord.Embed(title="Help", color=0xffff00)
         embed.add_field(name="> 名稱", value="```陰陽師查詢工具```", inline=False)
         embed.add_field(name="> 查詢範圍", value="```懸賞封印 / 懸賞封印線索 / 逢魔答題```", inline=False)
-        embed.add_field(name="> 更新時間", value="```2020/09/08```", inline=False)
+        embed.add_field(name="> 更新時間", value="```2020/10/02```", inline=False)
         embed.set_footer(text="有任何問題或建議請找 YellowToFish#5671")
         await msg.channel.send(embed=embed)
 
