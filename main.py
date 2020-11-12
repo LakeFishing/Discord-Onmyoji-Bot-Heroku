@@ -3,6 +3,9 @@ from discord.ext import commands
 import json
 import os
 
+import requests as req
+from io import BytesIO
+
 import random
 from PIL import Image
 import pyimgur
@@ -116,7 +119,8 @@ async def 十連抽(msg):
     pic = ["https://i.imgur.com/Nx72jjy.png","https://i.imgur.com/KsCi7Xa.png","https://i.imgur.com/3tGzRNA.png"]
 
     for i in range(3):
-        fromImge = Image.open(url=pic[i])
+        response = req.get(pic[i])
+        fromImge = Image.open(BytesIO(response.content))
         # loc = ((i % 2) * 200, (int(i/2) * 200))
         loc = ((int(i/2) * 120), (i % 2) * 120)
         # print(loc)
