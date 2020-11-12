@@ -108,22 +108,13 @@ async def on_message(msg):
 
     await bot.process_commands(msg)
 
-"""
-@bot.command()
-async def 十連抽(msg):
-    random_pic = random.choice(jdata_5["pic"])
-    file = discord.File(random_pic, filename="image.png")
-    embed = discord.Embed()
-    embed.set_image(url="attachment://image.png")
-    await msg.channel.send(file=file, embed=embed)
-"""
-
 @bot.command()
 async def 十連抽(msg):
     embed = discord.Embed()
     toImage = Image.new('RGBA',(600,240),color="white")
     for i in range(3):
-        fromImge = Image.open(jdata_5["pic"][i])
+        a = jdata_5["pic"][i]
+        fromImge = Image.open(a)
         # loc = ((i % 2) * 200, (int(i/2) * 200))
         loc = ((int(i/2) * 120), (i % 2) * 120)
         # print(loc)
