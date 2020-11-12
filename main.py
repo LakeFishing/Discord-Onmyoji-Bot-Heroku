@@ -126,20 +126,13 @@ async def 十連抽(msg):
         fromImge = Image.open(jdata_5["pic"][i])
         # loc = ((i % 2) * 200, (int(i/2) * 200))
         loc = ((int(i/2) * 120), (i % 2) * 120)
+        # print(loc)
         toImage.paste(fromImge, loc)
 
-    toImage.save("01.png")
-
-    CLIENT_ID = "6fc571a99676b13"
-    PATH = "01.png"
-    title = "Uploaded with PyImgur"
-
-    im = pyimgur.Imgur(CLIENT_ID)
-    uploaded_image = im.upload_image(PATH, title=title)
-
-    # file = discord.File(uploaded_image.link, filename="image.png")
-    embed.set_image(url=uploaded_image.link)
-    await msg.channel.send(embed = embed)
+    toImage.save('01.png')
+    file = discord.File("01.png", filename="image.png")
+    embed.set_image(url="attachment://image.png")
+    await msg.channel.send(file=file, embed = embed)
     os.remove("01.png")
 
 bot.run(os.environ['TOKEN'])
