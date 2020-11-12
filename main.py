@@ -22,7 +22,7 @@ with open("search_clue.json","r",encoding="utf-8") as jFile_4:
     jdata_4 = json.load(jFile_4)
 
 with open("picture.json","r",encoding="utf-8") as jFile_5:
-    jdata_5 = json.load(jFile_5)
+    jdata_5 = json.loads(jFile_5)
 
 bot = commands.Bot(command_prefix="+")
 bot.remove_command("help")
