@@ -3,6 +3,10 @@ from discord.ext import commands
 import json
 import os
 
+import random
+from PIL import Image
+import pyimgur
+
 with open("setting.json","r",encoding="utf-8") as jFile_1:
     jdata_1 = json.load(jFile_1)
 
@@ -15,7 +19,12 @@ with open("search_qa.json","r",encoding="utf-8") as jFile_3:
 with open("search_clue.json","r",encoding="utf-8") as jFile_4:
     jdata_4 = json.load(jFile_4)
 
+with open("picture.json","r",encoding="utf-8") as jFile_5:
+    jdata_5 = json.load(jFile_5)
+
 bot = commands.Bot(command_prefix="+")
+bot.remove_command("help")
+prefix = "+"
 
 @bot.event
 async def on_ready():
@@ -24,6 +33,7 @@ async def on_ready():
 
 @bot.event
 async def on_message(msg):
+    
     qa_string = ""
     clue_string = ""
 
@@ -31,55 +41,105 @@ async def on_message(msg):
     qa_result = False
     clue_result = False
 
+    rewardchannellist = list(jdata_1["RewardAgreeChannel"])
+    qachannellist = list(jdata_1["QAAgreeChannel"])
+    keywords = list(jdata_2.keys())
+    questions = list(jdata_3.keys())
+    clues = list(jdata_4.keys())
+
     embed=discord.Embed(title="查詢結果", color=0xffff00)
 
-    keywords = list(jdata_2.keys())
-    rewardchannellist = list(jdata_1["RewardAgreeChannel"])
-    if msg.author != bot.user and msg.author.bot == False:
+    if msg.author != bot.user and msg.author.bot == False and msg.is_system() == False and msg.content.startswith("+"):
+        word_string_in_temp = msg.content.lstrip("+")
+        word_string = word_string_in_temp.lstrip()
+
+        """懸賞封印"""
         for keyword in keywords:
-            if keyword in msg.content and msg.channel.id in rewardchannellist and msg.is_system() == False:
+            if keyword in word_string and msg.channel.id in rewardchannellist:
                 embed.add_field(name="> 懸賞封印", value=jdata_2[keyword], inline=False)
                 result = True
 
-    clues = list(jdata_4.keys())
-    if msg.author != bot.user and msg.author.bot == False:
+        """懸賞封印線索"""
         for clue in clues:
-            if msg.content in clue and msg.channel.id in rewardchannellist and msg.is_system() == False:
+            if word_string in clue and msg.channel.id in rewardchannellist:
                 clue_string += jdata_4[clue]
                 result = True
                 clue_result = True
         if clue_result == True:
             embed.add_field(name="> 懸賞封印線索", value=clue_string, inline=False)
 
-    questions = list(jdata_3.keys())
-    qachannellist = list(jdata_1["QAAgreeChannel"])
-    if msg.author != bot.user and msg.author.bot == False:
+        """逢魔之時"""
         for question in questions:
-            if msg.content.upper() in question and msg.channel.id in qachannellist and msg.is_system() == False:
+            if word_string.upper() in question and msg.channel.id in qachannellist:
                 qa_string += jdata_3[question]
                 result = True
                 qa_result = True
         if qa_result == True:
             embed.add_field(name="> 逢魔之時", value=qa_string, inline=False)
 
-    if result == True and embed.__len__() < 1000:
-        embed.set_footer(text="有任何問題或建議請找 YellowToFish#5671")
-        await msg.channel.send(embed=embed)
+        """HELP"""
+        if word_string.upper() == "HELP":
+            embed=discord.Embed(title="Help", color=0xffff00)
+            embed.add_field(name="> 名稱", value="```陰陽師查詢工具```", inline=False)
+            embed.add_field(name="> 查詢範圍", value="```懸賞封印 / 懸賞封印線索 / 逢魔答題```", inline=False)
+            embed.add_field(name="> 更新時間", value="```2020/11/10```", inline=False)
+            embed.set_footer(text="有任何問題或建議請找 YellowToFish#5671")
+            await msg.channel.send(embed=embed)
 
-    if embed.__len__() >= 1000 and msg.author.bot == False:
-        embed.clear_fields()
-        embed.add_field(name="> 錯誤", value="```查詢結果過多，判定為錯誤查詢```", inline=False)
-        embed.set_footer(text="有任何問題或建議請找 YellowToFish#5671")
-        await msg.channel.send(embed=embed)
+        """更新日誌"""
+        if word_string.upper() == "LOG":
+            embed=discord.Embed(title="Change Log", color=0xffff00)
+            embed.add_field(name="> 更新日誌", value="```新增：所有查詢需帶有前輟字元'+'才能觸發``````更正：瑩草部分錯字```", inline=False)
+            embed.add_field(name="> 更新時間", value="```2020/11/10```", inline=False)
+            embed.set_footer(text="有任何問題或建議請找 YellowToFish#5671")
+            await msg.channel.send(embed=embed)
+
+        """正常結果"""
+        if result == True and embed.__len__() < 1000:
+            embed.set_footer(text="有任何問題或建議請找 YellowToFish#5671")
+            await msg.channel.send(embed=embed)
+
+        """錯誤結果"""
+        if embed.__len__() >= 1000:
+            embed.clear_fields()
+            embed.add_field(name="> 錯誤", value="```查詢結果過多，判定為錯誤查詢```", inline=False)
+            embed.set_footer(text="有任何問題或建議請找 YellowToFish#5671")
+            await msg.channel.send(embed=embed)
 
     await bot.process_commands(msg)
 
-    if msg.content.upper() == "HELP" and msg.author != bot.user and msg.is_system() == False and msg.author.bot == False:
-        embed=discord.Embed(title="Help", color=0xffff00)
-        embed.add_field(name="> 名稱", value="```陰陽師查詢工具```", inline=False)
-        embed.add_field(name="> 查詢範圍", value="```懸賞封印 / 懸賞封印線索 / 逢魔答題```", inline=False)
-        embed.add_field(name="> 更新時間", value="```2020/10/02```", inline=False)
-        embed.set_footer(text="有任何問題或建議請找 YellowToFish#5671")
-        await msg.channel.send(embed=embed)
+"""
+@bot.command()
+async def 十連抽(msg):
+    random_pic = random.choice(jdata_5["pic"])
+    file = discord.File(random_pic, filename="image.png")
+    embed = discord.Embed()
+    embed.set_image(url="attachment://image.png")
+    await msg.channel.send(file=file, embed=embed)
+"""
+
+@bot.command()
+async def 十連抽(msg):
+    embed = discord.Embed()
+    toImage = Image.new('RGBA',(600,240),color="white")
+    for i in range(3):
+        fromImge = Image.open(jdata_5["pic"][i])
+        # loc = ((i % 2) * 200, (int(i/2) * 200))
+        loc = ((int(i/2) * 120), (i % 2) * 120)
+        toImage.paste(fromImge, loc)
+
+    toImage.save("01.png")
+
+    CLIENT_ID = "6fc571a99676b13"
+    PATH = "01.png"
+    title = "Uploaded with PyImgur"
+
+    im = pyimgur.Imgur(CLIENT_ID)
+    uploaded_image = im.upload_image(PATH, title=title)
+
+    # file = discord.File(uploaded_image.link, filename="image.png")
+    embed.set_image(url=uploaded_image.link)
+    await msg.channel.send(embed = embed)
+    os.remove("01.png")
 
 bot.run(os.environ['TOKEN'])
