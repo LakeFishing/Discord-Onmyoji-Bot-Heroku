@@ -115,7 +115,7 @@ async def 十連抽(msg):
 
     pic = ["https://i.imgur.com/Nx72jjy.png","https://i.imgur.com/KsCi7Xa.png","https://i.imgur.com/3tGzRNA.png","https://yys.res.netease.com/pc/zt/20161108171335/data/shishen/217.png?v1"]
 
-    for i in range(3):
+    for i in range(4):
         response = req.get(pic[i])
         fromImge = Image.open(BytesIO(response.content))
         # loc = ((i % 2) * 200, (int(i/2) * 200))
