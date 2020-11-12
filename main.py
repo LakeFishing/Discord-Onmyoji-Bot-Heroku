@@ -2,6 +2,8 @@ import discord
 from discord.ext import commands
 import json
 import os
+import requests
+from io import BytesIO
 
 import random
 from PIL import Image
@@ -113,8 +115,8 @@ async def 十連抽(msg):
     embed = discord.Embed()
     toImage = Image.new('RGBA',(600,240),color="white")
     for i in range(3):
-        a = jdata_5["pic"][i]
-        fromImge = Image.open(a)
+        response = requests.get(jdata_5["pic"][i])
+        fromImge = Image.open(response)
         # loc = ((i % 2) * 200, (int(i/2) * 200))
         loc = ((int(i/2) * 120), (i % 2) * 120)
         # print(loc)
