@@ -1,2 +1,2 @@
 discord
-PIL == 8.0.1
+pillow == 8.0.1
