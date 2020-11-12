@@ -22,9 +22,6 @@ with open("search_qa.json","r",encoding="utf-8") as jFile_3:
 with open("search_clue.json","r",encoding="utf-8") as jFile_4:
     jdata_4 = json.load(jFile_4)
 
-# with open("picture.json","r",encoding="utf-8") as jFile_5:
-    # jdata_5 = json.load(jFile_5)
-
 bot = commands.Bot(command_prefix="+")
 bot.remove_command("help")
 prefix = "+"
@@ -116,7 +113,7 @@ async def 十連抽(msg):
     embed = discord.Embed()
     toImage = Image.new('RGBA',(600,240),color="white")
 
-    pic = ["https://i.imgur.com/Nx72jjy.png","https://i.imgur.com/KsCi7Xa.png","https://i.imgur.com/3tGzRNA.png"]
+    pic = ["https://i.imgur.com/Nx72jjy.png","https://i.imgur.com/KsCi7Xa.png","https://i.imgur.com/3tGzRNA.png","https://yys.res.netease.com/pc/zt/20161108171335/data/shishen/217.png?v1"]
 
     for i in range(3):
         response = req.get(pic[i])
