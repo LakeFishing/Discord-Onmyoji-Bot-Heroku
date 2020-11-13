@@ -6,9 +6,10 @@ import os
 import requests as req
 from io import BytesIO
 
-import random
 from PIL import Image
 import pyimgur
+
+import rare
 
 with open("setting.json","r",encoding="utf-8") as jFile_1:
     jdata_1 = json.load(jFile_1)
@@ -117,19 +118,31 @@ async def 十連抽(msg):
     rolledchannellist = list(jdata_1["RolledChannel"])
     
     if msg.channel.id in rolledchannellist:
-        embed = discord.Embed()
+
         toImage = Image.new('RGBA',(600,240),color="white")
+        pic_list, pic_num = rare.Rolled()
 
-        for i in range(3):
-            response = req.get(jdata_5["pic"][i])
-            fromImge = Image.open(BytesIO(response.content))
-            loc = ((int(i/2) * 120), (i % 2) * 120)
-            toImage.paste(fromImge, loc)
+        for i in range(10):
+            try:
+                response = req.get(pic_list[i])
+                fromImge = Image.open(BytesIO(response.content))
+                loc = ((int(i/2) * 120), (i % 2) * 120)
+                toImage.paste(fromImge, loc)
+            except:
+                break
+        await msg.channel.send("roll fail")
 
-        toImage.save('01.png')
-        file = discord.File("01.png", filename="image.png")
+        save_name = str(pic_num) + ".png"
+        toImage.save(save_name)
+        file = discord.File(save_name, filename="image.png")
+
+        embed = discord.Embed(title="抽卡結果", color=0xffff00)
+        embed.add_field(name="> SP", value="1", inline=True)
+        embed.add_field(name="> SSR", value="2", inline=True)
+        embed.add_field(name="> SR", value="4", inline=True)
+        embed.add_field(name="> R", value="10", inline=True)
         embed.set_image(url="attachment://image.png")
         await msg.channel.send(file=file, embed = embed)
-        os.remove("01.png")
+        os.remove(save_name)
 
 bot.run(os.environ['TOKEN'])
