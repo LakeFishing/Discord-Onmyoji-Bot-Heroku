@@ -7,7 +7,6 @@ import requests as req
 from io import BytesIO
 
 from PIL import Image
-import pyimgur
 
 import rare
 
