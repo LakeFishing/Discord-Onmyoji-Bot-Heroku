@@ -120,7 +120,7 @@ async def 十連抽(msg):
     if msg.channel.id in rolledchannellist:
 
         toImage = Image.new('RGBA',(600,240),color="white")
-        pic_list, pic_num = rare.Rolled()
+        pic_list, pic_num, rare_list = rare.Rolled()
 
         for i in range(10):
             try:
@@ -137,11 +137,11 @@ async def 十連抽(msg):
         file = discord.File(save_name, filename="image.png")
 
         embed = discord.Embed(title="抽卡結果", color=0xffff00)
-        embed.add_field(name="> SP", value="1", inline=True)
-        embed.add_field(name="> SSR", value="2", inline=True)
-        embed.add_field(name="> SR", value="4", inline=True)
-        embed.add_field(name="> R", value="10", inline=True)
+        embed.add_field(name="SP & SSR", value=rare_list[0] + rare_list[1], inline=False)
+        embed.add_field(name="SR", value=rare_list[2], inline=True)
+        embed.add_field(name="R", value=rare_list[3], inline=True)
         embed.set_image(url="attachment://image.png")
+        embed.set_footer(text="有任何問題或建議請找 YellowToFish#5671")
         await msg.channel.send(file=file, embed = embed)
         os.remove(save_name)
 
