@@ -32,7 +32,7 @@ prefix = "+"
 @bot.event
 async def on_ready():
     print(">> Online <<")
-    await bot.change_presence(activity=discord.Game(name="陰陽師 / help查看更多"))
+    await bot.change_presence(activity=discord.Game(name="陰陽師 / +help查看更多"))
 
 @bot.event
 async def on_message(msg):
