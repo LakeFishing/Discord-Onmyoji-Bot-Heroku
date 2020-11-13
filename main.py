@@ -130,16 +130,15 @@ async def 十連抽(msg):
                 toImage.paste(fromImge, loc)
             except:
                 break
-        await msg.channel.send("roll fail")
 
         save_name = str(pic_num) + ".png"
         toImage.save(save_name)
         file = discord.File(save_name, filename="image.png")
 
         embed = discord.Embed(title="抽卡結果", color=0xffff00)
-        embed.add_field(name="SP & SSR", value=rare_list[0] + rare_list[1], inline=False)
-        embed.add_field(name="SR", value=rare_list[2], inline=True)
-        embed.add_field(name="R", value=rare_list[3], inline=True)
+        embed.add_field(name="> SP & SSR 數量", value=rare_list[0] + rare_list[1], inline=False)
+        embed.add_field(name="> SR 數量", value=rare_list[2], inline=True)
+        embed.add_field(name="> R 數量", value=rare_list[3], inline=True)
         embed.set_image(url="attachment://image.png")
         embed.set_footer(text="有任何問題或建議請找 YellowToFish#5671")
         await msg.channel.send(file=file, embed = embed)
