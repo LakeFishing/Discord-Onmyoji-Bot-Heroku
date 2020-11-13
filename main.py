@@ -124,8 +124,8 @@ async def 十連抽(msg):
         for i in range(10):
             try:
                 response = req.get(pic_list[i], stream=True)
-                space = BytesIO(response.content)
-                fromImge = Image.open(space.read)
+                #space = BytesIO(response.content)
+                fromImge = Image.open(BytesIO(response.content))
                 loc = ((int(i/2) * 120), (i % 2) * 120)
                 toImage.paste(fromImge, loc)
             except:
