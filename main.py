@@ -132,6 +132,7 @@ async def 十連抽(msg):
                 toImage.paste(fromImage, loc)
             except:
                 white = True
+                break
 
         if white == False:
             save_name = str(pic_num) + ".png"
