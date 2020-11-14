@@ -106,33 +106,46 @@ async def on_message(msg):
     await bot.process_commands(msg)
 
 @bot.command()
-async def rolltest(msg):
+async def 十抽(msg):
+
+    white = False
 
     rolledchannellist = list(jdata_1["RolledChannel"])
 
     if msg.channel.id in rolledchannellist:
-
         toImage = Image.new('RGBA',(600,240),color="white")
         pic_list, pic_num, rare_list = rare.Rolled()
 
     for i in range(10):
-        fromImage = Image.open(pic_list[i])
-        loc = ((int(i/2) * 120), (i % 2) * 120)
-        toImage.paste(fromImage, loc)
-        fromImage.close()
+        try:
+            fromImage = Image.open(pic_list[i])
+            loc = ((int(i/2) * 120), (i % 2) * 120)
+            toImage.paste(fromImage, loc)
+            fromImage.close()
+        except:
+            white = True
+            break
     
-    save_name = str(pic_num) + ".png"
-    toImage.save(save_name)
-    toImage.close()
-    file = discord.File(save_name, filename="image.png")
-    
-    embed = discord.Embed(title="抽卡結果", color=0xffff00)
-    embed.add_field(name="> SP & SSR 數量", value="```" + str(rare_list[0] + rare_list[1]) + "```", inline=False)
-    embed.add_field(name="> SR 數量", value="```" + str(rare_list[2]) + "```", inline=True)
-    embed.add_field(name="> R 數量", value="```" + str(rare_list[3]) + "```", inline=True)
-    embed.set_image(url="attachment://image.png")
-    embed.set_footer(text="有任何問題或建議請找 YellowToFish#5671")
-    await msg.channel.send(file=file, embed = embed)
-    os.remove(save_name)
+    if white == False:
+        save_name = str(pic_num) + ".png"
+        toImage.save(save_name)
+        toImage.close()
+        file = discord.File(save_name, filename="image.png")
+        
+        embed = discord.Embed(title="抽卡結果", color=0xffff00)
+        embed.add_field(name="> SP & SSR 數量", value="```" + str(rare_list[0] + rare_list[1]) + "```", inline=False)
+        embed.add_field(name="> SR 數量", value="```" + str(rare_list[2]) + "```", inline=True)
+        embed.add_field(name="> R 數量", value="```" + str(rare_list[3]) + "```", inline=True)
+        embed.set_image(url="attachment://image.png")
+        embed.set_footer(text="有任何問題或建議請找 YellowToFish#5671")
+        await msg.channel.send(file=file, embed = embed)
+        os.remove(save_name)
+    else:
+        embed = discord.Embed(title="抽卡結果", color=0xffff00)
+        embed.add_field(name="> SP & SSR 數量", value="```" + str(rare_list[0] + rare_list[1]) + "```", inline=False)
+        embed.add_field(name="> SR 數量", value="```" + str(rare_list[2]) + "```", inline=True)
+        embed.add_field(name="> R 數量", value="```" + str(rare_list[3]) + "```", inline=True)
+        embed.set_footer(text="暫時無法生成抽卡結果圖片\n有任何問題或建議請找 YellowToFish#5671")
+        await msg.channel.send(embed = embed)
 
 bot.run(os.environ['TOKEN'])
