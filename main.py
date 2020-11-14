@@ -77,17 +77,18 @@ async def on_message(msg):
         """HELP"""
         if word_string.upper() == "HELP":
             embed=discord.Embed(title="Help", color=0xffff00)
-            embed.add_field(name="> 名稱", value="```陰陽師查詢工具```", inline=False)
-            embed.add_field(name="> 查詢範圍", value="```懸賞封印 / 懸賞封印線索 / 逢魔答題```", inline=False)
-            embed.add_field(name="> 更新時間", value="```2020/11/10```", inline=False)
+            embed.add_field(name="> 名稱", value="```陰陽師助手```", inline=False)
+            embed.add_field(name="> 查詢相關", value="```懸賞封印 / 懸賞封印線索 / 逢魔答題```", inline=False)
+            embed.add_field(name="> 抽卡相關", value="```無活動概率十抽 / 活動概率十抽```", inline=False)
+            embed.add_field(name="> 更新時間", value="```2020/11/15```", inline=False)
             embed.set_footer(text="有任何問題或建議請找 YellowToFish#5671")
             await msg.channel.send(embed=embed)
 
         """更新日誌"""
         if word_string.upper() == "LOG":
             embed=discord.Embed(title="Change Log", color=0xffff00)
-            embed.add_field(name="> 更新日誌", value="```新增：所有查詢需帶有前輟字元'+'才能觸發``````更正：瑩草部分錯字```", inline=False)
-            embed.add_field(name="> 更新時間", value="```2020/11/10```", inline=False)
+            embed.add_field(name="> 更新日誌", value="```新增：抽卡模擬```", inline=False)
+            embed.add_field(name="> 更新時間", value="```2020/11/15```", inline=False)
             embed.set_footer(text="有任何問題或建議請找 YellowToFish#5671")
             await msg.channel.send(embed=embed)
 
