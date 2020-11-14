@@ -155,4 +155,11 @@ async def 十連抽(msg):
             embed.set_footer(text="暫時無法生成抽卡結果圖片\n有任何問題或建議請找 YellowToFish#5671")
             await msg.channel.send(embed = embed)
 
+@bot.command()
+async def test(msg):
+    aimage = Image.open("./icons/SSR/217.png")
+    aimage.save("0000.png")
+    pic = discord.File("0000.png")
+    await msg.channel.send(file=pic)
+
 bot.run(os.environ['TOKEN'])
