@@ -1,3 +1,2 @@
 discord
 pillow == 8.0.1
-pyimgur == 0.6.0

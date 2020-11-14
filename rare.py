@@ -1,8 +1,5 @@
 import random
-import json
-
-with open("picture.json","r",encoding="utf-8") as jFile_5:
-    jdata_5 = json.load(jFile_5)
+import os
 
 def Rolled():
     pic_list = []
@@ -33,17 +30,21 @@ def Rolled():
     return pic_list, pic_num, [sp_num, ssr_num, sr_num, r_num]
 
 def SP():
-    a = random.choice(jdata_5["sp"])
-    return a[1]
+    sp_file = os.listdir("./icons/SP/")
+    sp_pic = random.choice(sp_file)
+    return str("./icons/SP/" + sp_pic)
 
 def SSR():
-    b = random.choice(jdata_5["ssr"])
-    return b[1]
+    ssr_file = os.listdir("./icons/SSR/")
+    ssr_pic = random.choice(ssr_file)
+    return str("./icons/SSR/" + ssr_pic)
 
 def SR():
-    c = random.choice(jdata_5["sr"])
-    return c[1]
+    sr_file = os.listdir("./icons/SR/")
+    sr_pic = random.choice(sr_file)
+    return str("./icons/SR/" + sr_pic)
 
 def R():
-    d = random.choice(jdata_5["r"])
-    return d[1]
+    r_file = os.listdir("./icons/R/")
+    r_pic = random.choice(r_file)
+    return str("./icons/R/" + r_pic)
