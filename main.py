@@ -87,8 +87,8 @@ async def on_message(msg):
         """更新日誌"""
         if word_string.upper() == "LOG":
             embed=discord.Embed(title="Change Log", color=0xffff00)
-            embed.add_field(name="> 更新日誌", value="```新增：抽卡模擬```", inline=False)
-            embed.add_field(name="> 更新時間", value="```2020/11/15```", inline=False)
+            embed.add_field(name="> 更新日誌", value="```新增：孟婆懸賞封印地點```", inline=False)
+            embed.add_field(name="> 更新時間", value="```2020/11/22```", inline=False)
             embed.set_footer(text="有任何問題或建議請找 YellowToFish#5671")
             await msg.channel.send(embed=embed)
 
