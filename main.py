@@ -89,7 +89,7 @@ async def on_message(msg):
         if word_string.upper() == "LOG":
             embed=discord.Embed(title="Change Log", color=0xffff00)
             embed.add_field(name="> 更新日誌", value="```新增：活動十抽模擬抽卡``````新增：抽卡結果下方概率公示```", inline=False)
-            embed.add_field(name="> 更新時間", value="```2020/11/23```", inline=False)
+            embed.add_field(name="> 更新時間", value="```2020/11/24```", inline=False)
             embed.set_footer(text="有任何問題或建議請找 YellowToFish#5671")
             await msg.channel.send(embed=embed)
 
@@ -182,7 +182,7 @@ async def 活動十抽(msg):
         embed.add_field(name="> SR 數量", value="```" + str(rare_list[2]) + "```", inline=True)
         embed.add_field(name="> R 數量", value="```" + str(rare_list[3]) + "```", inline=True)
         embed.set_image(url="attachment://image.png")
-        embed.set_footer(text="SP : 0.625% ; SSR : 2.5% ; SR : 20% ; R : 76.875%\n新式神SSR千姬出現概率占SSR概率中的15%\n有任何問題或建議請找 YellowToFish#5671")
+        embed.set_footer(text="SP : 0.625% ; SSR : 2.5% ; SR : 20% ; R : 76.875%\n新式神 SSR千姬 指定出現概率占SSR概率中的 15%\n有任何問題或建議請找 YellowToFish#5671")
         await msg.channel.send(file=file, embed = embed)
         os.remove(save_name)
     else:
