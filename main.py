@@ -81,15 +81,15 @@ async def on_message(msg):
             embed.add_field(name="> 名稱", value="```陰陽師助手```", inline=False)
             embed.add_field(name="> 查詢相關", value="```懸賞封印 / 懸賞封印線索 / 逢魔答題```", inline=False)
             embed.add_field(name="> 抽卡相關", value="```無活動概率十抽 / 活動概率十抽```", inline=False)
-            embed.add_field(name="> 更新時間", value="```2020/11/15```", inline=False)
+            embed.add_field(name="> 更新時間", value="```2020/12/25```", inline=False)
             embed.set_footer(text="有任何問題或建議請找 YellowToFish#5671")
             await msg.channel.send(embed=embed)
 
         """更新日誌"""
         if word_string.upper() == "LOG":
             embed=discord.Embed(title="Change Log", color=0xffff00)
-            embed.add_field(name="> 更新日誌", value="```新增：活動十抽模擬抽卡``````新增：抽卡結果下方概率公示```", inline=False)
-            embed.add_field(name="> 更新時間", value="```2020/11/24```", inline=False)
+            embed.add_field(name="> 更新日誌", value="```新增：新式神SP初翎山風``````新增：逢魔題目五題``````更新：活動抽卡概率UP式神```", inline=False)
+            embed.add_field(name="> 更新時間", value="```2020/12/25```", inline=False)
             embed.set_footer(text="有任何問題或建議請找 YellowToFish#5671")
             await msg.channel.send(embed=embed)
 
@@ -182,7 +182,7 @@ async def 活動十抽(msg):
         embed.add_field(name="> SR 數量", value="```" + str(rare_list[2]) + "```", inline=True)
         embed.add_field(name="> R 數量", value="```" + str(rare_list[3]) + "```", inline=True)
         embed.set_image(url="attachment://image.png")
-        embed.set_footer(text="SP : 0.625% ; SSR : 2.5% ; SR : 20% ; R : 76.875%\n新式神 SSR千姬 指定出現概率占SSR概率中的 15%\n有任何問題或建議請找 YellowToFish#5671")
+        embed.set_footer(text="SP : 0.625% ; SSR : 2.5% ; SR : 20% ; R : 76.875%\n新式神 SP初翎山風 指定出現概率占SP概率中的 15%\n有任何問題或建議請找 YellowToFish#5671")
         await msg.channel.send(file=file, embed = embed)
         os.remove(save_name)
     else:

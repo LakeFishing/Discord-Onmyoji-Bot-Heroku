@@ -30,18 +30,18 @@ def Rolled():
     return pic_list, pic_num, [sp_num, ssr_num, sr_num, r_num]
 
 def SP():
-    sp_file = os.listdir("./icons/SP/")
-    sp_pic = random.choice(sp_file)
-    return str("./icons/SP/" + sp_pic)
-
-def SSR():
     eventUP = random.randint(1,100)
     if eventUP <= 15:
-        return str("./icons/SSR/356.png")
+        return str("./icons/SSR/357.png")
     elif eventUP <= 100:
-        ssr_file = os.listdir("./icons/SSR/")
-        ssr_pic = random.choice(ssr_file)
-        return str("./icons/SSR/" + ssr_pic)
+        sp_file = os.listdir("./icons/SP/")
+        sp_pic = random.choice(sp_file)
+        return str("./icons/SP/" + sp_pic)
+
+def SSR():
+    ssr_file = os.listdir("./icons/SSR/")
+    ssr_pic = random.choice(ssr_file)
+    return str("./icons/SSR/" + ssr_pic)
 
 def SR():
     sr_file = os.listdir("./icons/SR/")
