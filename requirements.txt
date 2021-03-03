@@ -1,2 +1,4 @@
 discord
+pymysql
+requests
 pillow == 8.0.1
