@@ -85,6 +85,10 @@ class Search(commands.Cog):
         except:
             qa_result = "```該式神無資料或輸入錯誤```"
             embed.add_field(name = "> 錯誤", value = qa_result, inline = True)
+        if embed.__len__() >= 1000:
+            embed.clear_fields()
+            embed.add_field(name = "> 錯誤", value = "```查詢結果過多，判定為錯誤查詢```", inline = False)
+            embed.set_footer(text="有任何問題或建議請找 YellowToFish#5671")
         await ctx.channel.send(embed = embed)
 
 def setup(bot):
