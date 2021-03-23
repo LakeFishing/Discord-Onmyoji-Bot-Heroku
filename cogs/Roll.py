@@ -134,7 +134,7 @@ def Rolled():
 def SP_event():
     eventUP = random.randint(1, 100)
     if eventUP <= 15:
-        return str("icons/SP/358.png")
+        return str("icons/SP/362.png")
     elif eventUP <= 100:
         sp_file = os.listdir("icons/SP/")
         sp_pic = random.choice(sp_file)
