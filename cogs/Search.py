@@ -84,10 +84,10 @@ class Search(commands.Cog):
                     qa_result = ("".join(map(str, qa_result)))
                     embed.add_field(name = "> 逢魔之時", value = qa_result, inline = False)
                 else:
-                    qa_result = "```該式神無資料或輸入錯誤```"
+                    qa_result = "```該關鍵字無資料或輸入錯誤```"
                     embed.add_field(name = "> 錯誤", value = qa_result, inline = True)
         except:
-            qa_result = "```該式神無資料或輸入錯誤```"
+            qa_result = "```該關鍵字無資料或輸入錯誤```"
             embed.add_field(name = "> 錯誤", value = qa_result, inline = True)
         if embed.__len__() >= 1000:
             embed.clear_fields()
