@@ -77,13 +77,15 @@ class Search(commands.Cog):
                 command = f"SELECT question, answer FROM qa WHERE question LIKE '%{target}%'"
                 cursor.execute(command)
                 fetch = cursor.fetchall()
-                print(fetch)
-                print(len(fetch))
                 qa_result = []
-                for x in range(len(fetch)):
-                    qa_result.append("```題目：" + fetch[x][0] + " / 答案：" + fetch[x][1] + "```")
-                qa_result = ("".join(map(str, qa_result)))
-            embed.add_field(name = "> 逢魔之時", value = qa_result, inline = False)
+                if len(fetch) != 0:
+                    for x in range(len(fetch)):
+                        qa_result.append("```題目：" + fetch[x][0] + " / 答案：" + fetch[x][1] + "```")
+                    qa_result = ("".join(map(str, qa_result)))
+                    embed.add_field(name = "> 逢魔之時", value = qa_result, inline = False)
+                else:
+                    qa_result = "```該式神無資料或輸入錯誤```"
+                    embed.add_field(name = "> 錯誤", value = qa_result, inline = True)
         except:
             qa_result = "```該式神無資料或輸入錯誤```"
             embed.add_field(name = "> 錯誤", value = qa_result, inline = True)
