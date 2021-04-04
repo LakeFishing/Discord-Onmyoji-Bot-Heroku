@@ -77,6 +77,8 @@ class Search(commands.Cog):
                 command = f"SELECT question, answer FROM qa WHERE question LIKE '%{target}%'"
                 cursor.execute(command)
                 fetch = cursor.fetchall()
+                print(fetch)
+                print(len(fetch))
                 qa_result = []
                 for x in range(len(fetch)):
                     qa_result.append("```題目：" + fetch[x][0] + " / 答案：" + fetch[x][1] + "```")
