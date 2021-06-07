@@ -1,5 +1,5 @@
 {
-    "date_logs" : "2021 / 04 / 04",
+    "date_logs" : "2021 / 06 / 07",
     "commands_logs" : ["式神線索查詢連結至式神懸賞查詢", "將資料庫從json轉移至phpMyAdmin"],
-    "data_logs" : ["新增：逢魔題目十七題"]
+    "data_logs" : ["新增：新SSR式神帝釋天","新增：新SSR式神阿修羅","新增：帝釋天活動抽卡概率UP"]
 }
