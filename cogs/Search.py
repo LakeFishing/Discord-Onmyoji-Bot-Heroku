@@ -47,22 +47,34 @@ class Search(commands.Cog):
             with conn.cursor() as cursor:
                 command = f"SELECT name FROM clues WHERE clue LIKE '%{target}%'"
                 cursor.execute(command)
-                fetch = cursor.fetchone()
+                fetch = cursor.fetchall()
                 clue_result = []
                 reward_result = []
-                for x in fetch:
-                    if x != "":
-                        clue_result.append("```" + x + "```")
-                        command = f"SELECT ans1, ans2, ans3 FROM reward WHERE name = '{x}'"
-                        cursor.execute(command)
-                        fetch = cursor.fetchone()
-                        for y in fetch:
+                if len(fetch) == 1:
+                    command = f"SELECT name FROM clues WHERE clue LIKE '%{target}%'"
+                    cursor.execute(command)
+                    fetch = cursor.fetchone()
+                    for x in fetch:
+                        if x != "":
+                            clue_result.append("```" + x + "```")
+                            command = f"SELECT ans1, ans2, ans3 FROM reward WHERE name = '{x}'"
+                            cursor.execute(command)
+                            fetch = cursor.fetchone()
+                            for y in fetch:
+                                if y != "":
+                                    reward_result.append("```" + y + "```")
+                            reward_result = ("".join(map(str, reward_result)))
+                    clue_result = ("".join(map(str, clue_result)))
+                    embed.add_field(name = "> 線索對應式神", value = clue_result, inline = False)
+                    embed.add_field(name = "> 懸賞封印", value = reward_result, inline = False)
+                elif len(fetch) > 1:
+                    for x in fetch:
+                        for y in x:
                             if y != "":
-                                reward_result.append("```" + y + "```")
-                        reward_result = ("".join(map(str, reward_result)))
-                clue_result = ("".join(map(str, clue_result)))
-            embed.add_field(name = "> 線索對應式神", value = clue_result, inline = False)
-            embed.add_field(name = "> 懸賞封印", value = reward_result, inline = False)
+                                y = y.replace("\'","")
+                                clue_result.append("```" + y + "```")
+                    clue_result = ("".join(map(str, clue_result)))
+                    embed.add_field(name="> 線索對應式神", value=clue_result, inline=False)
         except:
             clue_result = "```該式神無資料或輸入錯誤```"
             embed.add_field(name = "> 錯誤", value = clue_result, inline = True)
