@@ -12,7 +12,6 @@ async def on_ready():
     count = 0
     for _ in bot.guilds:
         count +=1
-        print(_.member_count)
     print(str(count))
 
 @bot.event
