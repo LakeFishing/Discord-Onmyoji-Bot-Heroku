@@ -47,7 +47,7 @@ class Search(commands.Cog):
             with conn.cursor() as cursor:
                 command = f"SELECT name FROM clues WHERE clue LIKE '%{target}%'"
                 cursor.execute(command)
-                fetch = cursor.fetchall()
+                fetch = cursor.fetchone()
                 clue_result = []
                 reward_result = []
                 for x in fetch:
