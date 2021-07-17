@@ -20,6 +20,7 @@ async def on_command_error(ctx, error):
         return
 
 bot.remove_command("help")
+bot.load_extension("cogs.About")
 bot.load_extension("cogs.Help")
 bot.load_extension("cogs.Roll")
 bot.load_extension("cogs.Search")
