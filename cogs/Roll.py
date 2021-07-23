@@ -89,10 +89,10 @@ def Rolled_event():
             luckNum = random.randint(1,100000)
             pic_num = pic_num + luckNum
             if luckNum <= 625:
-                pic_list.append(SP())
+                pic_list.append(SP_event())
                 sp_num = sp_num + 1
             elif luckNum <= 3125:
-                pic_list.append(SSR_event())
+                pic_list.append(SSR())
                 ssr_num = ssr_num + 1
             elif luckNum <= 23125:
                 pic_list.append(SR())
@@ -134,7 +134,7 @@ def Rolled():
 def SP_event():
     eventUP = random.randint(1, 100)
     if eventUP <= 15:
-        return str("icons/SP/362.png")
+        return str("icons/SP/366.png")
     elif eventUP <= 100:
         sp_file = os.listdir("icons/SP/")
         sp_pic = random.choice(sp_file)
