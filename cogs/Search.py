@@ -27,8 +27,8 @@ class Search(commands.Cog):
     async def 懸賞(self, ctx, target):
         embed = discord.Embed(title = "查詢結果", color = 0xffff00)
         try:
-            if target in keywords:
-                embed.add_field(name="> 懸賞封印", value=jdata_2[target], inline=False)
+            if keywords in target:
+                embed.add_field(name="> 懸賞封印", value=jdata_2[keywords], inline=False)
         except:
             reward_result = "```該式神無資料或輸入錯誤```"
             embed.add_field(name = "> 錯誤", value = reward_result, inline = True)
@@ -36,28 +36,35 @@ class Search(commands.Cog):
 
     @commands.command()   
     async def 線索(self, ctx, target):
+        clue_string = ""
         embed = discord.Embed(title = "查詢結果", color = 0xffff00)
         try:
             for clue in clues:
                 if target in clue:
-                    embed.add_field(name="> 懸賞封印", value=jdata_4[clue], inline=False)
+                    clue_string += jdata_4[clue]
+            if clue_string != "":
+                embed.add_field(name="> 線索", value=jdata_4[clue], inline=False)
+            else:
+                reward_result = "```該式神無資料或輸入錯誤```"
+                embed.add_field(name = "> 錯誤", value = reward_result, inline = True)
         except:
             reward_result = "```該式神無資料或輸入錯誤```"
             embed.add_field(name = "> 錯誤", value = reward_result, inline = True)
-            if ctx.channel.id == 736965029642895427:
-                for clue in clues:
-
-                    await ctx.channel.send(clue)
-                    await ctx.channel.send("test")
         await ctx.channel.send(embed = embed)
 
     @commands.command()
     async def 逢魔(self, ctx, target):
+        question_string = ""
         embed = discord.Embed(title = "查詢結果", color = 0xffff00)
         try:
             for question in questions:
                 if target in question:
-                    embed.add_field(name="> 懸賞封印", value=jdata_3[question], inline=False)
+                    question_string += jdata_3[question]
+            if question_string != "":
+                embed.add_field(name="> 逢魔", value=jdata_3[question], inline=False)
+            else:
+                reward_result = "```該式神無資料或輸入錯誤```"
+                embed.add_field(name = "> 錯誤", value = reward_result, inline = True)
         except:
             reward_result = "```該式神無資料或輸入錯誤```"
             embed.add_field(name = "> 錯誤", value = reward_result, inline = True)
