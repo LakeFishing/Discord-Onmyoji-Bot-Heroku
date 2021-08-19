@@ -40,7 +40,7 @@ class Search(commands.Cog):
         try:
             for clue in clues:
                 if target in clue:
-                    embed.add_field(name="> 懸賞封印", value=jdata_4[target], inline=False)
+                    embed.add_field(name="> 懸賞封印", value=jdata_4[clue], inline=False)
         except:
             reward_result = "```該式神無資料或輸入錯誤```"
             embed.add_field(name = "> 錯誤", value = reward_result, inline = True)
@@ -57,7 +57,7 @@ class Search(commands.Cog):
         try:
             for question in questions:
                 if target in question:
-                    embed.add_field(name="> 懸賞封印", value=jdata_3[target], inline=False)
+                    embed.add_field(name="> 懸賞封印", value=jdata_3[question], inline=False)
         except:
             reward_result = "```該式神無資料或輸入錯誤```"
             embed.add_field(name = "> 錯誤", value = reward_result, inline = True)
