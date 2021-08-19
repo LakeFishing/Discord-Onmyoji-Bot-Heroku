@@ -29,9 +29,6 @@ class Search(commands.Cog):
         try:
             if target in keywords:
                 embed.add_field(name="> 懸賞封印", value=jdata_2[target], inline=False)
-                if ctx.channel.id == 736965029642895427:
-                    await ctx.channel.send(keywords)
-                    await ctx.channel.send("test")
         except:
             reward_result = "```該式神無資料或輸入錯誤```"
             embed.add_field(name = "> 錯誤", value = reward_result, inline = True)
@@ -47,6 +44,9 @@ class Search(commands.Cog):
         except:
             reward_result = "```該式神無資料或輸入錯誤```"
             embed.add_field(name = "> 錯誤", value = reward_result, inline = True)
+            if ctx.channel.id == 736965029642895427:
+                    await ctx.channel.send(clues)
+                    await ctx.channel.send("test")
         await ctx.channel.send(embed = embed)
 
     @commands.command()
