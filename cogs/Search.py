@@ -5,7 +5,7 @@ import pymysql
 import requests
 import os
 
-with open("data//search_clue.json","r",encoding="utf-8") as jFile_2:
+with open("data//search_reward.json","r",encoding="utf-8") as jFile_2:
     jdata_2 = json.load(jFile_2)
 
 with open("data//search_qa.json","r",encoding="utf-8") as jFile_3:
