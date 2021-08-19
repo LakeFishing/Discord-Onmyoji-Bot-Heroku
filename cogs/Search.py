@@ -45,7 +45,9 @@ class Search(commands.Cog):
             reward_result = "```該式神無資料或輸入錯誤```"
             embed.add_field(name = "> 錯誤", value = reward_result, inline = True)
             if ctx.channel.id == 736965029642895427:
-                    await ctx.channel.send(clues)
+                for clue in clues:
+
+                    await ctx.channel.send(clue)
                     await ctx.channel.send("test")
         await ctx.channel.send(embed = embed)
 
