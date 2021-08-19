@@ -43,7 +43,7 @@ class Search(commands.Cog):
                 if target in clue:
                     clue_string += jdata_4[clue]
             if clue_string != "":
-                embed.add_field(name="> 線索", value=jdata_4[clue], inline=False)
+                embed.add_field(name="> 線索", value=clue_string, inline=False)
             else:
                 reward_result = "```該式神無資料或輸入錯誤```"
                 embed.add_field(name = "> 錯誤", value = reward_result, inline = True)
@@ -61,7 +61,7 @@ class Search(commands.Cog):
                 if target in question:
                     question_string += jdata_3[question]
             if question_string != "":
-                embed.add_field(name="> 逢魔", value=jdata_3[question], inline=False)
+                embed.add_field(name="> 逢魔", value=question_string, inline=False)
             else:
                 reward_result = "```該式神無資料或輸入錯誤```"
                 embed.add_field(name = "> 錯誤", value = reward_result, inline = True)
