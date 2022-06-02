@@ -27,8 +27,8 @@ class Search(commands.Cog):
     async def 懸賞(self, ctx, target):
         embed = discord.Embed(title = "查詢結果", color = 0xffff00)
         try:
-            if keywords in target:
-                embed.add_field(name="> 懸賞封印", value=jdata_2[keywords], inline=False)
+            if target in keywords:
+                embed.add_field(name="> 懸賞封印", value=jdata_2[target], inline=False)
         except:
             reward_result = "```該式神無資料或輸入錯誤```"
             embed.add_field(name = "> 錯誤", value = reward_result, inline = True)
