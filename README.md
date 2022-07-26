@@ -18,6 +18,6 @@ Support by / Heroku
 
 ## 其他
 
-最後更新時間 / 2021/03/04
+最後更新時間 / 2022/03/08
 
 任何反饋及建議請聯繫 / Discord YellowToFish#5671
